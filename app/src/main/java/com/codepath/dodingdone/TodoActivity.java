@@ -1,4 +1,6 @@
 package com.codepath.dodingdone;
+
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -50,6 +52,29 @@ public class TodoActivity extends AppCompatActivity {
                     }
                 }
         );
+        /* @todo Support edit action
+         * @todo Populate edit form
+         * @todo Send back results on save
+         * @todo Update todo items
+         */
+        lvItems.setOnItemClickListener(
+                new AdapterView.OnItemClickListener(){
+                    @Override
+                    public void onItemClick(AdapterView<?> adapter, View item, int pos, long id){
+                        launchEditView();
+                    }
+                }
+        );
+    }
+
+
+    public void launchEditView() {
+        /** @param
+         *
+         */
+        // first parameter is the context, second is the class of the activity to launch
+        Intent i = new Intent(TodoActivity.this, EditItemActivity.class);
+        startActivity(i); // brings up the second activity
     }
 
     private void readItems(){
