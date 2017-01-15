@@ -52,9 +52,8 @@ public class TodoActivity extends AppCompatActivity {
                     }
                 }
         );
+
         /* @todo Support edit action
-         * @todo Populate edit form
-         * @todo Send back results on save
          * @todo Update todo items
          */
         lvItems.setOnItemClickListener(
