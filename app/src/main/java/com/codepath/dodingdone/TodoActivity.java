@@ -8,6 +8,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import org.apache.commons.io.FileUtils;
 
@@ -60,21 +61,41 @@ public class TodoActivity extends AppCompatActivity {
                 new AdapterView.OnItemClickListener(){
                     @Override
                     public void onItemClick(AdapterView<?> adapter, View item, int pos, long id){
-                        launchEditView();
+                        launchEditView(item, pos);
                     }
                 }
         );
 
     }
 
-
-    public void launchEditView() {
+    // TodoActivity.java
+    // REQUEST_CODE can be any value we like, used to determine the result type later
+    private final int REQUEST_CODE = 20;
+    // FirstActivity, launching an activity for a result
+    public void launchEditView(View item, int pos) {
         /** @param
          *
          */
         // first parameter is the context, second is the class of the activity to launch
         Intent i = new Intent(TodoActivity.this, EditItemActivity.class);
-        startActivity(i); // brings up the second activity
+        i.putExtra("item",(((TextView)item).getText()).toString());
+        i.putExtra("pos",pos);
+        startActivityForResult(i,REQUEST_CODE); // brings up the second activity
+    }
+
+    // ActivityOne.java, time to handle the result of the sub-activity
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        // REQUEST_CODE is defined above
+        if (resultCode == RESULT_OK && requestCode == REQUEST_CODE) {
+            // Extract name value from result extras
+            String newItemContent = data.getExtras().getString("item");
+            int pos = data.getExtras().getInt("pos");
+            // Update the item in the ListView
+            items.set(pos,newItemContent);
+            itemsAdapter.notifyDataSetChanged();
+            writeItems();
+        }
     }
 
     private void readItems(){
