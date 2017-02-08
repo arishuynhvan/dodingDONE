@@ -25,7 +25,10 @@ The following **optional** features are implemented:
 
 The following **additional** features are implemented:
 
-* [ ] List anything else that you can get done to improve the app functionality!
+* [ ] Reward for done milestones
+* [ ] Default recording *done* tasks rather than *todo* tasks
+* [ ] Scrollable *items* view & separated by days
+* [ ] Filter by time options
 
 ## Video Walkthrough 
 
